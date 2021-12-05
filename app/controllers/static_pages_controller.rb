@@ -5,7 +5,8 @@ class StaticPagesController < ApplicationController
     flickr = Flickr.new ENV['FLICKR_KEY'], ENV['FLICKR_SECRET']
     @user_id = session[:user_id]
     session[:user_id] = nil
-    @photos = flickr.photos.search(user_id: @user_id)
+    response = flickr.photos.search(user_id: @user_id)
+    @photos = response.each { |photo| puts photo }
   end
 
   def create
