@@ -2,26 +2,26 @@ require 'flickr'
 
 class StaticPagesController < ApplicationController
   def index
-    @user_id = user_id
+    @tags = tags
     flickr = Flickr.new ENV['FLICKR_KEY'], ENV['FLICKR_SECRET']
-    response = flickr.photos.search(user_id: @user_id)
+    response = flickr.photos.search(tags: @tags)
     @photos = response.map do |p|
       "https://farm#{p.farm}.staticflickr.com/#{p.server}/#{p.id}_#{p.secret}.jpg"
     end
   end
 
   def create
-    session[:user_id] = params[:user_id]
+    session[:tags] = params[:tags]
     redirect_to root_path
   end
 
   private
 
-    def user_id
-      user_id = if session[:user_id] == ""
-                  "otter"
-                else
-                  session[:user_id]
-                end
+    def tags
+      tags = if session[:tags] == ""
+              "otter"
+            else
+              session[:tags]
+            end
     end
 end
