@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 require 'flickr'
 
+# Static Pages Controller class
 class StaticPagesController < ApplicationController
   def index
     @tags = tags
@@ -17,11 +20,7 @@ class StaticPagesController < ApplicationController
 
   private
 
-    def tags
-      tags = if session[:tags] == ""
-              "otter"
-            else
-              session[:tags]
-            end
-    end
+  def tags
+    session[:tags] == '' ? 'otter' : session[:tags]
+  end
 end
