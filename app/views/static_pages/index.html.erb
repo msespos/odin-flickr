@@ -2,6 +2,6 @@
   User ID: <%= f.text_field :user_id %>
   <%= f.submit 'Go!' %>
 <% end %>
-
-<%= @user_id %><br>
-<%= @photos %>
+<% @photos.each do |p| %>
+  <%= image_tag p, class: "img-responsive"%>
+<% end %>

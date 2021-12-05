@@ -6,7 +6,9 @@ class StaticPagesController < ApplicationController
     @user_id = session[:user_id]
     session[:user_id] = nil
     response = flickr.photos.search(user_id: @user_id)
-    @photos = response.each { |photo| puts photo }
+    @photos = response.map do |p|
+      "https://farm#{p.farm}.staticflickr.com/#{p.server}/#{p.id}_#{p.secret}.jpg"
+    end
   end
 
   def create
