@@ -6,7 +6,7 @@ require 'flickr'
 class StaticPagesController < ApplicationController
   def index
     flickr = Flickr.new ENV['FLICKR_KEY'], ENV['FLICKR_SECRET']
-    @tags = session[:tags] == '' ? 'otter' : session[:tags]
+    @tags = session[:tags].nil? ? 'otter' : session[:tags]
     response = flickr.photos.search(tags: @tags)
     @photos = response.map do |p|
       "https://farm#{p.farm}.staticflickr.com/#{p.server}/#{p.id}_#{p.secret}.jpg"
