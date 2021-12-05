@@ -1,7 +1,8 @@
+<h1>Ottersearch</h1>
 <%= form_with do |f| %>
-  User ID: <%= f.text_field :user_id %>
+  <h3>Enter tag(s):</h3><%= f.text_field :tags %>
   <%= f.submit 'Go!' %>
-<% end %><br>
+<% end %><br><br>
 <% @photos.each do |p| %>
   <%= image_tag p, class: "img-responsive" %>
 <% end %>
